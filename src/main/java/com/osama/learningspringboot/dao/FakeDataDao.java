@@ -2,9 +2,11 @@ package com.osama.learningspringboot.dao;
 
 import com.osama.learningspringboot.model.Gender;
 import com.osama.learningspringboot.model.User;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class FakeDataDao implements UserDao {
 
     private static Map<UUID, User> database;
