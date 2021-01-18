@@ -51,8 +51,17 @@
 </details>
 
 <details>
-<summary>Dependency Injection</summary>
+<summary>Annotations</summary>
 
-
+Annotations | Description | 
+--- | --- | 
+@Repository | Marked on a Repository file in DAO/DAL.
+@Service | Marked on a Service file.
+@Autowired | Marked on a constructor with dependency injection.
+@RestController | Marked on a Class with API's in it.
+@RequestMapping(method = RequestMethod.GET) | Marked on a `GET` method.
+@GetMapping | Marked on a `GET` method. 
+@PostMapping | Marked on a `POST` method.
+@DeleteMapping | Marked on a `DELETE` method.
 
 </details>
