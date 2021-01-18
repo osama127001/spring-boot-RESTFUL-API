@@ -8,10 +8,10 @@ public class User {
     private final String firsName;
     private final String lastName;
     private final Gender gender;
-    private final short age;
+    private final Number age;
     private final String email;
 
-    public User(UUID userUid, String firsName, String lastName, Gender gender, short age, String email) {
+    public User(UUID userUid, String firsName, String lastName, Gender gender, Number age, String email) {
         this.userUid = userUid;
         this.firsName = firsName;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public class User {
         return gender;
     }
 
-    public short getAge() {
+    public Number getAge() {
         return age;
     }
 
