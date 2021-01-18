@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/api/v1/users")
 public class UserController {
     private UserService userService;
 
@@ -18,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, path = "get")
     public List<User> fetchUsers() {
         return userService.getAllUsers();
     }
