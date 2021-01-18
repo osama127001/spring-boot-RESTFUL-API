@@ -7,6 +7,7 @@
 [comment]: <> (</details>)
 
 
+[comment]: <> (Simple Spring Boot REST-full API)
 <details>
 <summary>Simple Spring Boot REST-full API</summary>
 
@@ -50,6 +51,7 @@
 
 </details>
 
+[comment]: <> (Annotations)
 <details>
 <summary>Annotations</summary>
 
