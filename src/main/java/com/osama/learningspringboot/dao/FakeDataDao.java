@@ -4,6 +4,7 @@ import com.osama.learningspringboot.model.Gender;
 import com.osama.learningspringboot.model.User;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
 import java.util.*;
 
 @Repository
@@ -24,8 +25,8 @@ public class FakeDataDao implements UserDao {
     }
 
     @Override
-    public User selectUserByUserUid(UUID userUid) {
-        return database.get(userUid);
+    public Optional<User> selectUserByUserUid(UUID userUid) {
+        return Optional.ofNullable(database.get(userUid));
     }
 
     @Override
