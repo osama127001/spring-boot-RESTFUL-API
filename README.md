@@ -17,7 +17,7 @@
 
 [comment]: <> (Annotations)
 <details>
-<summary>Annotations</summary>
+<summary><b>Annotations</b></summary>
 
 Annotations | Description | 
 --- | --- | 
@@ -70,6 +70,7 @@ Annotations | Description |
             }
       }
 
+* To ensure the return of the JSON payload, make sure to add a getter for the message in the `Message` class in the above example.
 * When accessed on `localhost:8080`, a JSON is returned:
 
         {
@@ -92,4 +93,24 @@ Annotations | Description |
 
 </details>
 
+[comment]: <> (ResponseEntity and HTTP Response Code)
+<details>
+<summary>ResponseEntity and HTTP Response Code</summary>
+
+* `ResponseEntity` is a generic class in spring boot which is used to handle a request. It returns a Response code of the given data.
+* `Optional` is a generic class which returns null, if the object is not assigned, else it returns the object.  
+* An example given below shows the use of Response Entity used to handle a request:
+
+      @RequestMapping(method = RequestMethod.GET, path = "{userUid}")
+      public ResponseEntity<?> fetchUser2(@PathVariable("userUid") UUID userUid) {
+          Optional<User> optionalUser = userService.getUser(userUid);
+          if (optionalUser.isPresent()) {
+              return ResponseEntity.ok(optionalUser.get());
+          }
+          return ResponseEntity.status(HttpStatus.NOT_FOUND)
+              .body(new ErrorMessage("User " + userUid + "was not found!"));
+      }
+
+
+</details>
 
