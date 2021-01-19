@@ -1,10 +1,17 @@
-# Spring Boot
+
+<center>
+<h1>🍂 Spring Boot 🍂</h1>
+</center>
+<hr>
+
 
 [comment]: <> (<details>)
 
 [comment]: <> (<summary>Simple Spring Boot REST-full API</summary>)
 
 [comment]: <> (</details>)
+
+
 
 
 
@@ -23,6 +30,7 @@ Annotations | Description |
 @GetMapping | Marked on a `GET` method.
 @PostMapping | Marked on a `POST` method.
 @DeleteMapping | Marked on a `DELETE` method.
+@PathVariable | Marking a property as a path variable.
 
 </details>
 
@@ -69,4 +77,19 @@ Annotations | Description |
         }
 
 </details>
+
+[comment]: <> (Path Variables)
+<details>
+<summary>Adding Path Variable on an API</summary>
+
+* The following example shows how to add a path variable in a Request handler.
+
+      @RequestMapping(method = RequestMethod.GET, path = "{userUid}")
+          public User fetchUser(@PathVariable("userUid") UUID userUid) {
+          return userService.getUser(userUid).get();
+      }
+
+
+</details>
+
 
