@@ -79,4 +79,11 @@ public class UserController {
         return getIntegerResponseEntity(result);
     }
 
+    //DELETE: Delete a user using userUid
+    @RequestMapping(method = RequestMethod.DELETE, path = "{userUid}")
+    public ResponseEntity<Integer> deleteUser(@PathVariable("userUid") UUID userUid) {
+        int result = userService.removeUser(userUid);
+        return getIntegerResponseEntity(result);
+    }
+
 }
