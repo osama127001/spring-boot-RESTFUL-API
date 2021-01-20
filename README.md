@@ -195,3 +195,62 @@ Annotations | Description |
 
 
 </details>
+
+[comment]: <> (Query Params)
+<details>
+<summary><b>Query Params</b></summary>
+
+* Adding query params basically passes some variables through the URL in order to perform filtering.
+* To add a query parameter, use `?` and add the parameters in the URL. An example is shown below:
+
+      localhost:8081/api/v1/users/get?gender=MALE&ageLessThan=18
+
+* The following middleware handles this URL and gets the value of `gender` and `ageLessThan`.
+
+      // GET: All users from database.
+      @RequestMapping(method = RequestMethod.GET, path = "get")
+      public List<User> fetchUsers(@QueryParam("gender") String gender, @QueryParam("ageLessThan") Integer ageLessThan) {
+          System.out.println(gender);
+          System.out.println(ageLessThan);
+          return userService.getAllUsers();
+      }
+
+* If the query params are not added, the middleware will still return data normally.
+* Passing the Gender got by query-params inside a function in the `userService`:
+
+      public List<User> getAllUsers(Optional<String> gender) {
+          List<User> users = userDao.selectAllUsers();
+          if (!gender.isPresent()) {
+              return users;
+          }
+          try {
+              Gender theGender = Gender.valueOf(gender.get().toUpperCase());
+              return users.stream()
+                  .filter(user -> user.getGender().equals(theGender))
+                  .collect(Collectors.toList());
+          } catch (Exception exp) {
+                throw new IllegalStateException("Invalid Gender" + exp);
+          }
+      }
+
+* Middleware that handles query-params:
+
+      // GET: All users from database.
+      @RequestMapping(method = RequestMethod.GET, path = "get")
+          public List<User> fetchUsers(@QueryParam("gender") String gender) {
+          return userService.getAllUsers(Optional.ofNullable(gender));
+      }
+
+* Now we can GET send request using the following URL:
+
+      localhost:8081/api/v1/users/get?gender=female
+  
+  OR
+  
+      localhost:8081/api/v1/users/get?gender=MALE
+
+
+
+</details>
+
+

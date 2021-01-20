@@ -10,6 +10,7 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.QueryParam;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,6 +20,8 @@ import java.util.UUID;
 public class UserController {
     private UserService userService;
 
+
+    // CONSTRUCTOR: Injecting User service.
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -27,18 +30,10 @@ public class UserController {
 
     // GET: All users from database.
     @RequestMapping(method = RequestMethod.GET, path = "get")
-    public List<User> fetchUsers() {
-        return userService.getAllUsers();
+    public List<User> fetchUsers(@QueryParam("gender") String gender) {
+        return userService.getAllUsers(Optional.ofNullable(gender));
     }
 
-
-/*
-    // GET: User by Id from database.
-    @RequestMapping(method = RequestMethod.GET, path = "{userUid}")
-    public User fetchUser(@PathVariable("userUid") UUID userUid) {
-        return userService.getUser(userUid).get();
-    }
-*/
 
     /*
          Returns: Response of the request
