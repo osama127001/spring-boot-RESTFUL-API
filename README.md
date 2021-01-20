@@ -152,6 +152,33 @@ Annotations | Description |
 
 </details>
 
+[comment]: <> (Sending the PUT request from Postman)
+<details>
+<summary><b>Sending the PUT request from Postman</b></summary>
+
+* Following method/middleware is used to handle a PUT request:
+
+      /*
+          Returns: Response of the request
+          Used In: PUT, POST
+      */
+      private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
+          if (result == 1) {
+              return ResponseEntity.ok().build();
+          }
+          return ResponseEntity.badRequest().build();
+      }
+    
+    
+      // PUT: Updates the user object.
+      @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+      public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+          int result = userService.updateUser(user);
+          return getIntegerResponseEntity(result);
+      }
+
+
+</details>
 
 
 

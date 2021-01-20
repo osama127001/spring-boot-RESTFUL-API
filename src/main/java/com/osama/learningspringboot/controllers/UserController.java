@@ -40,6 +40,17 @@ public class UserController {
     }
 */
 
+    /*
+         Returns: Response of the request
+         Used In: PUT, POST
+    */
+    private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
+        if (result == 1) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 
     // GET: User by ID using path variable and ResponseEntity and ResponseCode.
     @RequestMapping(method = RequestMethod.GET, path = "{userUid}")
@@ -57,10 +68,15 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Integer> insertNewUser(@RequestBody User user) {
         int result = userService.insertUser(user);
-        if (result == 1) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
+        return getIntegerResponseEntity(result);
+    }
+
+
+    // PUT: Updates the user object.
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
+        int result = userService.updateUser(user);
+        return getIntegerResponseEntity(result);
     }
 
 }
