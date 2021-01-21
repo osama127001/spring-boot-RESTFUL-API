@@ -466,6 +466,9 @@ to ensure the immutability of the object to display correct data, and we also do
 <details>
 <summary><b>The Power of Getters</b></summary>
 
+<h1 align="center">
+  <kbd>JSON only works with getters</kbd>
+</h1>
 Any getter that returns anything or data in the model class, JSON will get that 
 getter and extract value from it. lets say we have 2 getters, these getters are not the 
 actual getters but just functions. Jackson will automatically remove the `get` and convert the rest 
@@ -493,6 +496,24 @@ The above getters will result in some extra data in our JSON object.
         "id": "723d2989-0be6-47df-928a-49967905439a"      
     }
 
+if you want to hide a property from JSON, simply user `@JsonIgnore` annotation on a getter.
+
+    @JsonIgnore
+    public String getEmail() {
+        return email;
+    }
+
+Now the following JSON is received as a result:
+
+    {           // No email!!!!!!!!!!!!!!!!!
+        "firstName": "Osama",
+        "lastName": "Khan",
+        "gender": "MALE",
+        "age": 23,
+        "fullName": "Osama Khan",                         
+        "dateOfBirth": "1998-01-21",                      
+        "id": "723d2989-0be6-47df-928a-49967905439a"      
+    }
 
 
 </details>
