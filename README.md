@@ -368,3 +368,77 @@ Annotations | Description |
       }
 
 </details>
+
+[comment]: <> (Serialization and De-Serialization with Jackson)
+<details>
+<summary><b>Serialization and De-Serialization with Jackson</b></summary>
+
+The data of an object is displayed on the web browser in the form of a JSON. `Jackson` is the Library used to convert the object data into a JSON.
+
+* Previously we had User model something like this:
+
+      public class User {
+      
+          private UUID userUid;
+          private String firsName;
+          private String lastName;
+          private Gender gender;
+          private Number age;
+          private String email;
+      
+          public User() {
+          }
+      
+          public User(UUID userUid, String firsName, String lastName, Gender gender, Number age, String email) {
+              this.userUid = userUid;
+              this.firsName = firsName;
+              this.lastName = lastName;
+              this.gender = gender;
+              this.age = age;
+              this.email = email;
+          }
+      
+      }
+
+* In the above model, the fields are not final, and we need a default constructor, But we need them to be final 
+to ensure the immutability of the object to display correct data, and we also don't need a default constructor.
+  
+* Also, the setUserUid() will not work, as the fields are final and initialized already.
+
+* We can user `@JsonProperty("name)` annotator with the fields for the object to work properly, and also creating a new user method:
+
+      public class User {
+      
+          private final UUID userUid;
+          private final String firstName;
+          private final String lastName;
+          private final Gender gender;
+          private final Number age;
+          private final String email;
+      
+      
+          public User(
+                  @JsonProperty("userUid") UUID userUid,
+                  @JsonProperty("firstName") String firstName,
+                  @JsonProperty("lastName") String lastName,
+                  @JsonProperty("gender") Gender gender,
+                  @JsonProperty("age") Number age,
+                  @JsonProperty("email") String email
+          ) {
+              this.userUid = userUid;
+              this.firstName = firstName;
+              this.lastName = lastName;
+              this.gender = gender;
+              this.age = age;
+              this.email = email;
+          }
+      
+          public static User newUser(UUID userUid, User user) {
+              return new User(userUid, user.getFirstName(), user.getLastName(), user.getGender(), user.getAge(), user.getEmail());
+          }
+      }
+
+
+</details>
+
+
