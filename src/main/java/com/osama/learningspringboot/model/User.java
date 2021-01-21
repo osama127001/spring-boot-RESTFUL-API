@@ -35,6 +35,7 @@ public class User {
     }
 
 
+    @JsonProperty("id")
     public UUID getUserUid() {
         return userUid;
     }

@@ -438,6 +438,27 @@ to ensure the immutability of the object to display correct data, and we also do
           }
       }
 
+* `Note`: Jackson user getters in the model to create JSON. 
+
+* If we add the `@JsonProperty("id")` on a getter, it will rename the `key` from `userUid` to `id` in the JSON obtained:
+
+      @JsonProperty("id")
+      public UUID getUserUid() {
+          return userUid;
+      }
+
+* The JSON object will look like this:
+
+      {
+          "id": "393b41c3-faf9-4c3a-b677-ea9b2c4bcd1c",  <-- key changed from "userUid" to "id"
+          "firstName": "Osama",
+          "lastName": "Khan",
+          "gender": "MALE",
+          "age": 23,
+          "email": "osama.khan@gmail.com"
+      }
+
+
 
 </details>
 
