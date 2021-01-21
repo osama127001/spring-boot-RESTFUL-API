@@ -462,4 +462,45 @@ to ensure the immutability of the object to display correct data, and we also do
 
 </details>
 
+[comment]: <> (The Power of Getters)
+<details>
+<summary><b>The Power of Getters</b></summary>
+
+Any getter that returns anything or data in the model class, JSON will get that 
+getter and extract value from it. lets say we have 2 getters, these getters are not the 
+actual getters but just functions. Jackson will automatically remove the `get` and convert the rest 
+of the name to camelcase and set that as the key-name, and the return value will be the value of that key.
+Let's say we have 2 methods/getters, which are not returning the actual field, but some extra data
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
+    
+    public LocalDate getDateOfBirth() {
+        return LocalDate.now().minusYears(this.age);
+    }
+
+The above getters will result in some extra data in our JSON object.
+
+    {
+        "firstName": "Osama",
+        "lastName": "Khan",
+        "gender": "MALE",
+        "age": 23,
+        "email": "osama.khan@gmail.com",
+        "fullName": "Osama Khan",                         <-- new data
+        "dateOfBirth": "1998-01-21",                      <-- new data
+        "id": "723d2989-0be6-47df-928a-49967905439a"      
+    }
+
+
+
+</details>
+
+
+
+
+
+
+
 

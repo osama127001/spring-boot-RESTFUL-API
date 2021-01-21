@@ -2,6 +2,7 @@ package com.osama.learningspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 public class User {
@@ -10,7 +11,7 @@ public class User {
     private final String firstName;
     private final String lastName;
     private final Gender gender;
-    private final Number age;
+    private final Integer age;
     private final String email;
 
 
@@ -19,7 +20,7 @@ public class User {
             @JsonProperty("firstName") String firstName,
             @JsonProperty("lastName") String lastName,
             @JsonProperty("gender") Gender gender,
-            @JsonProperty("age") Number age,
+            @JsonProperty("age") Integer age,
             @JsonProperty("email") String email
     ) {
         this.userUid = userUid;
@@ -32,6 +33,14 @@ public class User {
 
     public static User newUser(UUID userUid, User user) {
         return new User(userUid, user.getFirstName(), user.getLastName(), user.getGender(), user.getAge(), user.getEmail());
+    }
+
+    public String getFullName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return LocalDate.now().minusYears(this.age);
     }
 
 
@@ -52,7 +61,7 @@ public class User {
         return gender;
     }
 
-    public Number getAge() {
+    public Integer getAge() {
         return age;
     }
 
