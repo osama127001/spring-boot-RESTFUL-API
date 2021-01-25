@@ -17,6 +17,31 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 [comment]: <> (-------------------------------------------------------------------)
 
 
+
+
+
+[comment]: <> (IntelliJ Shortcuts)
+<details>
+<summary><b>IntelliJ Shortcuts</b></summary>
+
+# IntelliJ Shortcuts ⌨
+
+* `double tap shift`: Search anything in project.
+* `ctrl + alt`: Refactor / Format Code.
+* `ctrl + shift + enter`: Complete current statement.
+* `ctrl + /`: Comment line.
+* `ctrl + shift + /`: Comment block.
+* `hold ctrl + click`: goto declaration/definition.
+* `alt + enter`: show intended actions for error fix.
+* `alt + insert`: Insert constructor/getters/setters in class.
+* `atrl + alt + o`: Remove all un used classes.
+* `ctrl + w`: Expand Selection.
+* `ctrl + alt + v`: declare the statement in a variable.
+* `ctrl + shift + t`: Create a Unit test file for the selected file.
+
+
+</details>
+
 [comment]: <> (Configurations)
 <details>
 <summary><b>Configurations</b></summary>
@@ -525,6 +550,13 @@ Now the following JSON is received as a result:
 
 </details>
 
+[comment]: <> (Writing Unit tests)
+<details>
+<summary><b>Writing Unit tests with Junit, Mockito and Assert4j</b></summary>
+
+* Create a unit test file with `ctrl + shift + t` shortcut and add all the functions with the `setup/@before` method.   
+
+</details>
 
 
 
