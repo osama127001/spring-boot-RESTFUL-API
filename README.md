@@ -37,6 +37,13 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 Annotations | Description | 
 --- | --- | 
+@InitBinder | Pre-Processes all the requests coming into our controller.
+@NotNull | 
+@Min | 
+@Max | 
+@RequestParam() | 
+@Component | 
+@ModelAttribute | 
 @Repository | Marked on a Repository file in DAO/DAL.
 @Service | Marked on a Service file.
 @Autowired | Marked on a constructor with dependency injection.
