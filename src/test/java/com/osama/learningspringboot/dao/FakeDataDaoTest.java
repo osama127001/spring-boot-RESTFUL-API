@@ -6,6 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.ListResourceBundle;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -32,9 +35,23 @@ class FakeDataDaoTest {
     }
 
     @Test
-    void selectUserByUserUid() throws Exception {
+    void shouldSelectUserByUserUid() throws Exception {
+        UUID userUid = UUID.randomUUID();
+        User user = new User(userUid, "Aamir", "Hanif", Gender.MALE, 21, "aamir.hanif@gmail.com");
+        fakeDataDao.insertUser(userUid, user);
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
 
+        Optional<User> optionalUser = fakeDataDao.selectUserByUserUid(userUid);
+        assertThat(optionalUser.isPresent()).isTrue();
+        assertThat(optionalUser).get().isEqualToComparingFieldByField(user);
     }
+
+    @Test
+    void shouldNotSelectUserByRandomUserUid() throws Exception {
+        Optional<User> optionalUser = fakeDataDao.selectUserByUserUid(UUID.randomUUID());
+        assertThat(optionalUser.isPresent()).isFalse();
+    }
+
 
     @Test
     void updateUser() throws Exception {
