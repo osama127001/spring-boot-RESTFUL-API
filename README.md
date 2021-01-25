@@ -18,13 +18,9 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 
 
 
-
-
 [comment]: <> (IntelliJ Shortcuts)
 <details>
 <summary><b>IntelliJ Shortcuts</b></summary>
-
-# IntelliJ Shortcuts ⌨
 
 * `double tap shift`: Search anything in project.
 * `ctrl + alt`: Refactor / Format Code.
@@ -38,7 +34,6 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 * `ctrl + w`: Expand Selection.
 * `ctrl + alt + v`: declare the statement in a variable.
 * `ctrl + shift + t`: Create a Unit test file for the selected file.
-
 
 </details>
 
@@ -555,6 +550,20 @@ Now the following JSON is received as a result:
 <summary><b>Writing Unit tests with Junit, Mockito and Assert4j</b></summary>
 
 * Create a unit test file with `ctrl + shift + t` shortcut and add all the functions with the `setup/@before` method.   
+* `assertThat()` checks the changes that were made in the original file/functions.
+* For the testing of the UserService file, we are injecting UserDao (dependency injection), So in the 
+testing file, we can use mockito to mock the object.
+
+      @Mock
+      private FakeDataDao fakeDataDao;
+    
+      private UserService userService;
+    
+      @BeforeEach
+      void setUp() throws Exception {
+          MockitoAnnotations.initMocks(this);
+          userService = new UserService(fakeDataDao);
+      }
 
 </details>
 
