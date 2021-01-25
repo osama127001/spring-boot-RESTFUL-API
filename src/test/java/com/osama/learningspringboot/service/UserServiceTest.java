@@ -17,8 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mockingDetails;
+import static org.mockito.Mockito.*;
 
 class UserServiceTest {
 
@@ -111,15 +112,46 @@ class UserServiceTest {
         assertThat(user.getAge()).isEqualTo(23);
         assertThat(user.getEmail()).isEqualTo("osama.khan@gmail.com");
 
-
         assertThat(updateResult).isEqualTo(1);
     }
 
     @Test
     void shouldRemoveUser() throws Exception {
+        UUID testUserUid = UUID.randomUUID();
+        User testUser = new User(testUserUid, "Osama", "Khan",
+                Gender.MALE, 23, "osama.khan@gmail.com");
+
+        // mocking fakeDataDao.selectUserByUserUid() and fakeDataDao.updateUser()
+        given(fakeDataDao.selectUserByUserUid(testUserUid)).willReturn(Optional.of(testUser));
+        given(fakeDataDao.deleteUserByUserUid(testUserUid)).willReturn(1);
+
+        int deleteResult = userService.removeUser(testUserUid);
+
+        Mockito.verify(fakeDataDao).selectUserByUserUid(testUserUid);
+        Mockito.verify(fakeDataDao).deleteUserByUserUid(testUserUid);
+
+        assertThat(deleteResult).isEqualTo(1);
     }
 
     @Test
     void shouldInsertUser() throws Exception {
+        User testUser = new User(null, "Osama", "Khan",
+                Gender.MALE, 23, "osama.khan@gmail.com");
+
+        given(fakeDataDao.insertUser(Mockito.any(UUID.class), Mockito.eq(testUser))).willReturn(1);
+
+        ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
+
+        Mockito.verify(fakeDataDao).insertUser(Mockito.any(UUID.class), captor.capture());
+
+        User user = captor.getValue();
+
+        assertThat(user.getUserUid()).isNotNull();
+        assertThat(user.getFirstName()).isEqualTo("Osama");
+        assertThat(user.getLastName()).isEqualTo("Khan");
+        assertThat(user.getGender()).isEqualTo(Gender.MALE);
+        assertThat(user.getAge()).isEqualTo(23);
+        assertThat(user.getEmail()).isEqualTo("osama.khan@gmail.com");
+
     }
 }
