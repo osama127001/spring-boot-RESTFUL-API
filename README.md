@@ -570,8 +570,81 @@ testing file, we can use mockito to mock the object.
 
 </details>
 
+[comment]: <> (Creating our own Custom Validator using Custom Annotation)
+<details>
+<summary><b>Creating our own Custom Validator using Custom Annotation</b></summary>
 
+In the following example, we will create a custom annotation which will help us validate that the String value should start with `LUV`.
+Create the class with the following contents in it.
 
+    package com.osama.learningspringboot;
+    
+    import javax.validation.Constraint;
+    import javax.validation.Payload;
+    import java.lang.annotation.ElementType;
+    import java.lang.annotation.Retention;
+    import java.lang.annotation.RetentionPolicy;
+    import java.lang.annotation.Target;
+    
+    @Constraint(validatedBy = CourseCodeConstraintValidator.class)
+    @Target({ElementType.METHOD, ElementType.FIELD})
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface CourseCode {
+    
+        public String value() default "LUV";
+    
+        public String message() default "Course Code should start with LUV";
+    
+        // default groups
+        public Class <?>[] groups() default {};
+    
+        // default payloads
+        public Class<? extends Payload>[] payload() default {};
+    }
+
+Now create the class with the actual business logic:
+
+    package com.osama.learningspringboot;
+
+    import javax.validation.ConstraintValidator;
+    import javax.validation.ConstraintValidatorContext;
+    
+    public class CourseCodeConstraintValidator implements ConstraintValidator<CourseCode, String> {
+    
+        /*
+             We need to overload these 2 abstract methods. Use IntelliSense
+        */
+    
+        private String coursePrefix;
+    
+        @Override
+        public void initialize(CourseCode constraintAnnotation) {
+            coursePrefix = constraintAnnotation.value();
+        }
+    
+        @Override
+        public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
+            // s is the course code entered
+
+            if (s != null) {
+                return s.startsWith(coursePrefix);
+            } else {
+                return true;
+            }
+        }
+    }
+
+Apply the Annotation on a given string that needs to start with `LUV`
+
+    @CourseCode
+    public String courseCode;
+
+OR
+
+    @CourseCode(value="LUV", message="start with LUV")
+    public String courseCode;
+
+</details>
 
 
 
