@@ -565,6 +565,9 @@ testing file, we can use mockito to mock the object.
           userService = new UserService(fakeDataDao);
       }
 
+* When you are testing a particular class, make sure to remove static fields/methods as they might produce errors.
+* Or simply just don't test methods that are static.
+
 </details>
 
 
