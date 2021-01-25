@@ -4,19 +4,19 @@ import com.osama.learningspringboot.model.Gender;
 import com.osama.learningspringboot.model.User;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Repository
 public class FakeDataDao implements UserDao {
 
-    private static Map<UUID, User> database;
+    private Map<UUID, User> database;
 
-    static {
+    public FakeDataDao() {
         database = new HashMap<>();
         UUID osamaUserUid = UUID.randomUUID();
         database.put(osamaUserUid, new User(osamaUserUid, "Osama", "Khan",
                 Gender.MALE, 23, "osama.khan@gmail.com"));
+
     }
 
     @Override

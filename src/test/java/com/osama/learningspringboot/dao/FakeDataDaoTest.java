@@ -54,14 +54,33 @@ class FakeDataDaoTest {
 
 
     @Test
-    void updateUser() throws Exception {
+    void shouldUpdateUser() throws Exception {
+        UUID osamaUserUid = fakeDataDao.selectAllUsers().get(0).getUserUid();
+        User newOsama = new User(osamaUserUid, "Osama", "Bhai",
+                Gender.MALE, 23, "osama.khan@gmail.com");
+        fakeDataDao.updateUser(newOsama);
+        Optional<User> osamaUser = fakeDataDao.selectUserByUserUid(osamaUserUid);
+        assertThat(osamaUser.isPresent()).isTrue();
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(1);
+        assertThat(osamaUser.get()).isEqualToComparingFieldByField(newOsama);
     }
 
     @Test
-    void deleteUserByUserUid() throws Exception {
+    void shouldDeleteUserByUserUid() throws Exception {
+        UUID currentUserUid = fakeDataDao.selectAllUsers().get(0).getUserUid();
+        fakeDataDao.deleteUserByUserUid(currentUserUid);
+        assertThat(fakeDataDao.selectAllUsers()).isEmpty();
+        assertThat(fakeDataDao.selectUserByUserUid(currentUserUid).isPresent()).isFalse();
     }
 
     @Test
     void insertUser() throws Exception {
+        UUID newUserUid = UUID.randomUUID();
+        User newOsama = new User(newUserUid, "Aamir", "Hanif",
+                Gender.MALE, 23, "osama.khan@gmail.com");
+        fakeDataDao.insertUser(newUserUid, newOsama);
+        assertThat(fakeDataDao.selectAllUsers()).hasSize(2);
+        assertThat(fakeDataDao.selectUserByUserUid(newUserUid)).get().isEqualToComparingFieldByField(newOsama);
+
     }
 }
