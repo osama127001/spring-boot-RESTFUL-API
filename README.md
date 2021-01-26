@@ -17,6 +17,23 @@ Spring Boot makes it easy to create stand-alone, production-grade Spring based A
 [comment]: <> (-------------------------------------------------------------------)
 
 
+[comment]: <> (REST vs MVC)
+## REST vs MVC
+
+MVC | REST | 
+--- | --- |
+MVC is about how the inner side of your app works. | REST is about how your app "talks" with other apps.
+MVC Returns a view in response to a request. | REST Returns JSON/XML data with status code and message.
+         
+## N-Tier Architecture
+The n-tier architecture is an industry-proven software architecture model. It is suitable to support enterprise level client-server applications by providing solutions to scalability, security, fault tolerance, reusability, and maintainability. It helps developers to create flexible and reusable applications.
+
+
+![](images/nta.PNG)
+
+[comment]: <> (<img src="images/nta.PNG" width="320" align="center"></img>)
+
+## Topics
 
 [comment]: <> (IntelliJ Shortcuts)
 <details>
@@ -643,6 +660,14 @@ OR
 
     @CourseCode(value="LUV", message="start with LUV")
     public String courseCode;
+
+</details>
+
+[comment]: <> (HTTP Status Codes)
+<details>
+<summary><b>HTTP Status Codes</b></summary>
+
+![](images/http-status-codes.jpg)
 
 </details>
 
