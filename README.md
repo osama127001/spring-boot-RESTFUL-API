@@ -29,9 +29,9 @@ MVC Returns a view in response to a request. | REST Returns JSON/XML data with s
 The n-tier architecture is an industry-proven software architecture model. It is suitable to support enterprise level client-server applications by providing solutions to scalability, security, fault tolerance, reusability, and maintainability. It helps developers to create flexible and reusable applications.
 
 
-![](images/nta.PNG)
+[comment]: <> (![]&#40;images/nta.PNG&#41;)
 
-[comment]: <> (<img src="images/nta.PNG" width="320" align="center"></img>)
+<img src="images/nta.PNG" width="320" align="center"></img>
 
 ## Topics
 
@@ -672,5 +672,34 @@ OR
 </details>
 
 
+[comment]: <> (JAX-RS Resteasy and Jersey)
+<details>
+<summary><b>JAX-RS Resteasy and Jersey</b></summary>
+
+Uptil now we were implementing all the annotations provided by MVC like `RequestMapping`, `GetMapping` etc.
+Now we will use another alternative which is `JAX-RS`
+
+`JAX-RS` Shifts with 3 Implementations, all of them are used to implement Restful services.
+* JERSEY
+* Apache CXF
+* [RESTEasy (Provided by PayPal)](https://github.com/resteasy/Resteasy)
+
+`RESTEasy` is good and straight forward and it is also implemented in this project.
+
+There was no RESTEasy Spring Boot starter out there, so PayPal team decided to create one and share it with the
+community.
+
+[RESTEasy Dependency](https://github.com/paypal/resteasy-spring-boot) is provided in the repo by Paypal.
+
+    <dependency>
+       <groupId>com.paypal.springboot</groupId>
+       <artifactId>resteasy-spring-boot-starter</artifactId>
+       <version>2.3.4-RELEASE</version>
+       <scope>runtime</scope>
+    </dependency>
+
+
+
+</details>
 
 
