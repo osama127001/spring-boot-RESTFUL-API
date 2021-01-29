@@ -11,6 +11,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.QueryParam;
 import java.util.List;
 import java.util.Optional;
@@ -72,6 +73,9 @@ public class UserController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorMessage("User " + userUid + "was not found!"));
+
+        // The below method also works good if the response type is User.
+        // return userService.getUser(userUid).orElseThrow(() -> new NotFoundException("user " + userUid + "Not found!"));
     }
 
 
