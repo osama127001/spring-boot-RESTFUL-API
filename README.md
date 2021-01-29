@@ -29,9 +29,9 @@ MVC Returns a view in response to a request. | REST Returns JSON/XML data with s
 The n-tier architecture is an industry-proven software architecture model. It is suitable to support enterprise level client-server applications by providing solutions to scalability, security, fault tolerance, reusability, and maintainability. It helps developers to create flexible and reusable applications.
 
 
-[comment]: <> (![]&#40;images/nta.PNG&#41;)
+![](images/nta.PNG)
 
-<img src="images/nta.PNG" width="320" align="center"></img>
+[comment]: <> (<img src="images/nta.PNG" width="320" align="center"></img>)
 
 ## Topics
 
@@ -671,7 +671,6 @@ OR
 
 </details>
 
-
 [comment]: <> (JAX-RS Resteasy and Jersey)
 <details>
 <summary><b>JAX-RS Resteasy and Jersey</b></summary>
@@ -702,4 +701,78 @@ community.
 
 </details>
 
+[comment]: <> (Java Bean Validation)
+<details>
+<summary><b>Java Bean Validation</b></summary>
 
+* At this point if we send a POST request with empty body to the server, it will provide an
+error that age is null and age is required to set dob. so now we are going to force the controller to
+force the controller to accept the critical fields from the data.   
+  
+* Change the following function in `UserService.java`.
+
+      public int insertUser(User user) {
+          UUID userUid = UUID.randomUUID();
+          validateUser(user);
+          return userDao.insertUser(userUid, User.newUser(userUid, user));
+      }
+    
+      private void validateUser(User user) {
+          Objects.requireNonNull(user.getFirstName(), "first name required!");
+          Objects.requireNonNull(user.getLastName(), "last name required!");
+          Objects.requireNonNull(user.getAge(), "age required!");
+          Objects.requireNonNull(user.getEmail(), "email required!");
+      }
+  
+* The above way of validation is not very good, as it will generate a lot of boilerplate code.
+* So a good way is to use the following annotations
+
+Validation Annotations | Description
+---|---|
+@NotNull(message = "Display Error Message") | Marked on a property that cannot be null.
+@Max(value = 100) | Add a Max range.
+@Min(value = 0) | Add a min range.
+@Email | Marked on an email.
+
+* Mark the Annotations as shown below:
+
+      private final UUID userUid;
+    
+      @NotNull(message = "FirstName cannot be null")
+      private final String firstName;
+    
+      @NotNull
+      private final String lastName;
+    
+      @NotNull
+      private final Gender gender;
+    
+      @NotNull
+      @Max(value = 110)
+      @Min(value = 0)
+      private final Integer age;
+    
+      @NotNull
+      @Email
+      private final String email;
+
+* Activate the Validation Annotations by adding the `@Valid` Annotation in front of 
+  the actual bean Initialization. Also mark the controller class as `@Validated`.
+
+      /*
+           POST: Saving a user in the database.
+      */
+      @RequestMapping(
+              method = RequestMethod.POST,
+              consumes = MediaType.APPLICATION_JSON_VALUE,
+              produces = MediaType.APPLICATION_JSON_VALUE
+      )
+      public ResponseEntity<Integer> insertNewUser(@RequestBody @Valid User user) {
+          int result = userService.insertUser(user);
+          return getIntegerResponseEntity(result);
+      }
+
+
+
+
+</details>
