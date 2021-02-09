@@ -29,7 +29,7 @@ MVC Returns a view in response to a request. | REST Returns JSON/XML data with s
 The n-tier architecture is an industry-proven software architecture model. It is suitable to support enterprise level client-server applications by providing solutions to scalability, security, fault tolerance, reusability, and maintainability. It helps developers to create flexible and reusable applications.
 
 
-![](images/nta.PNG)
+![](assets/images/nta.PNG)
 
 [comment]: <> (<img src="images/nta.PNG" width="320" align="center"></img>)
 
@@ -685,7 +685,7 @@ OR
 <details>
 <summary><b>HTTP Status Codes</b></summary>
 
-![](images/http-status-codes.jpg)
+![](assets/images/http-status-codes.jpg)
 
 </details>
 
