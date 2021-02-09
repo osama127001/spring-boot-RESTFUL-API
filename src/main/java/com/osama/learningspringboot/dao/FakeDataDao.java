@@ -34,10 +34,10 @@ public class FakeDataDao implements UserDao {
             users = jdbcTemplate.query(
                     sql,
                     (resultSet, rowNum) -> new User(
-                            resultSet.getObject("id", java.util.UUID.class),
-                            resultSet.getString("firstName"),
-                            resultSet.getString("lastName"),
-                            resultSet.getObject("gender", Gender.class),
+                            UUID.fromString(resultSet.getString("id")),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("last_name"),
+                            Gender.valueOf(resultSet.getString("gender")),
                             resultSet.getInt("age"),
                             resultSet.getString("email")
                     ));
@@ -67,6 +67,21 @@ public class FakeDataDao implements UserDao {
     @Override
     public int insertUser(UUID userUid, User user) {
         database.put(userUid, user);
+        String sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?)";
+        try {
+            jdbcTemplate.update(
+                        sql,
+                        userUid.toString(),
+                        user.getFirstName(),
+                        user.getLastName(),
+                        user.getGender().toString(),
+                        user.getAge(),
+                        user.getEmail()
+                    );
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return -1;
+        }
         return 1;
     }
 }
