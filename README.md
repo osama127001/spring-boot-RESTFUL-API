@@ -35,6 +35,24 @@ The n-tier architecture is an industry-proven software architecture model. It is
 
 ## Topics
 
+[comment]: <> (Application Properties File)
+<details>
+<summary><b>application.properties file</b></summary>
+
+* For custom properties, create your own property in the `application.properties` file.
+
+      coder.name=osamaKhan
+
+  Now we can use the above used custom property in the code in any class:
+
+      @Value("${coder.name}")
+      private String name;
+
+
+
+</details>
+
+
 [comment]: <> (IntelliJ Shortcuts)
 <details>
 <summary><b>IntelliJ Shortcuts</b></summary>
