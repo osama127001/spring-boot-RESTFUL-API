@@ -2,6 +2,10 @@ package com.osama.learningspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -9,24 +13,32 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.UUID;
 
+@Entity
+@Table(name = "user")
 public class User {
 
+    @Id
     private final UUID userUid;
 
+    @Column(name = "first_name")
     @NotNull(message = "FirstName cannot be null")
     private final String firstName;
 
+    @Column(name = "last_name")
     @NotNull
     private final String lastName;
 
+    @Column(name = "gender")
     @NotNull
     private final Gender gender;
 
+    @Column(name = "age")
     @NotNull
     @Max(value = 110)
     @Min(value = 0)
     private final Integer age;
 
+    @Column(name = "email")
     @NotNull
     @Email
     private final String email;

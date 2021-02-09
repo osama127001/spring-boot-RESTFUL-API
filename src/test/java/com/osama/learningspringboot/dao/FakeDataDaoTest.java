@@ -4,6 +4,7 @@ import com.osama.learningspringboot.model.Gender;
 import com.osama.learningspringboot.model.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 import java.util.ListResourceBundle;
@@ -16,10 +17,10 @@ class FakeDataDaoTest {
 
     private FakeDataDao fakeDataDao;
 
-    @BeforeEach
-    void setUp() throws Exception {
-        fakeDataDao = new FakeDataDao();
-    }
+//    @BeforeEach
+//    void setUp() throws Exception {
+//        fakeDataDao = new FakeDataDao(jdbcTemplate);
+//    }
 
     @Test
     void shouldSelectAllUsers() throws Exception {
