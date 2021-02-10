@@ -24,14 +24,21 @@ MVC | REST |
 --- | --- |
 MVC is about how the inner side of your app works. | REST is about how your app "talks" with other apps.
 MVC Returns a view in response to a request. | REST Returns JSON/XML data with status code and message.
-         
+
+
 ## N-Tier Architecture
 The n-tier architecture is an industry-proven software architecture model. It is suitable to support enterprise level client-server applications by providing solutions to scalability, security, fault tolerance, reusability, and maintainability. It helps developers to create flexible and reusable applications.
 
-
-![](assets/images/nta.PNG)
+  ![](assets/images/nta.PNG)
 
 [comment]: <> (<img src="images/nta.PNG" width="320" align="center"></img>)
+
+[comment]: <> (JDBCTemplate and NamedParameterJdbcTemplate)
+## JdbcTemplate and NamedParameterJdbcTemplate
+
+This [resource](https://mkyong.com/spring-boot/spring-boot-jdbc-examples/)
+was used to implement **JDBC template with custome SQL and parameter binding**
+
 
 ## Topics
 
