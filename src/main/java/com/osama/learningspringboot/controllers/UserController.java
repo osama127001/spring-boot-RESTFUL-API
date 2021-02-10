@@ -25,8 +25,7 @@ public class UserController {
 
 
     /*
-         CONSTRUCTOR: Injecting User service.
-    */
+    * CONSTRUCTOR: Injecting User service. */
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -34,8 +33,7 @@ public class UserController {
 
 
     /*
-         GET: All users from database.
-    */
+    * GET: All users from database. */
     @RequestMapping(
             method = RequestMethod.GET,
             path = "get",
@@ -47,20 +45,7 @@ public class UserController {
 
 
     /*
-         Returns: Response of the request
-         Used In: PUT, POST
-    */
-    private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
-        if (result == 1) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
-
-    /*
-         GET: User by ID using path variable and ResponseEntity and ResponseCode.
-    */
+    * GET: User by ID using path variable and ResponseEntity and ResponseCode. */
     @RequestMapping(
             method = RequestMethod.GET,
             path = "{userUid}",
@@ -80,8 +65,7 @@ public class UserController {
 
 
     /*
-         POST: Saving a user in the database.
-    */
+    * POST: Saving a user in the database. */
     @RequestMapping(
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -94,21 +78,20 @@ public class UserController {
 
 
     /*
-         PUT: Updates the user object.
-    */
+    * PUT: Updates the user object. */
     @RequestMapping(
             method = RequestMethod.PUT,
+            path = "{userUid}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<Integer> updateUser(@RequestBody User user) {
-        int result = userService.updateUser(user);
+    public ResponseEntity<Integer> updateUser(@RequestBody @Valid User user, @PathVariable("userUid") UUID userUid) {
+        int result = userService.updateUser(user, userUid);
         return getIntegerResponseEntity(result);
     }
 
     /*
-        DELETE: Delete a user using userUid
-    */
+    * DELETE: Delete a user using userUid */
     @RequestMapping(
             method = RequestMethod.DELETE,
             path = "{userUid}",
@@ -118,5 +101,17 @@ public class UserController {
         int result = userService.removeUser(userUid);
         return getIntegerResponseEntity(result);
     }
+
+
+    /*
+    * Returns: Response of the request
+    * Used In: PUT, POST */
+    private ResponseEntity<Integer> getIntegerResponseEntity(int result) {
+        if (result == 1) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 
 }

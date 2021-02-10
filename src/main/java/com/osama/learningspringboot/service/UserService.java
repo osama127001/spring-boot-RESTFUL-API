@@ -42,10 +42,11 @@ public class UserService {
         return userDao.selectUserByUserUid(userUid);
     }
 
-    public int updateUser(User user) {
-        Optional<User> optionalUser = getUser(user.getUserUid());
+    public int updateUser(User user, UUID userUid) {
+        System.out.println(user.getLastName());
+        Optional<User> optionalUser = getUser(userUid);
         if (optionalUser.isPresent()) {
-            return userDao.updateUser(user);
+            return userDao.updateUser(user, userUid);
         }
         return -1;
     }

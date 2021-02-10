@@ -12,7 +12,7 @@ public interface UserDao {
 
     Optional<User> selectUserByUserUid(UUID userUid);
 
-    int updateUser(User user);
+    int updateUser(User user, UUID userUid);
 
     int deleteUserByUserUid(UUID userUid);
 

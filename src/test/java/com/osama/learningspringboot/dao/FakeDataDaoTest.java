@@ -59,7 +59,7 @@ class FakeDataDaoTest {
         UUID osamaUserUid = fakeDataDao.selectAllUsers().get(0).getUserUid();
         User newOsama = new User(osamaUserUid, "Osama", "Bhai",
                 Gender.MALE, 23, "osama.khan@gmail.com");
-        fakeDataDao.updateUser(newOsama);
+        fakeDataDao.updateUser(newOsama, osamaUserUid);
         Optional<User> osamaUser = fakeDataDao.selectUserByUserUid(osamaUserUid);
         assertThat(osamaUser.isPresent()).isTrue();
         assertThat(fakeDataDao.selectAllUsers()).hasSize(1);

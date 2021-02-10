@@ -96,13 +96,13 @@ class UserServiceTest {
 
         // mocking fakeDataDao.selectUserByUserUid() and fakeDataDao.updateUser()
         given(fakeDataDao.selectUserByUserUid(testUserUid)).willReturn(Optional.of(testUser));
-        given(fakeDataDao.updateUser(testUser)).willReturn(1);
+        given(fakeDataDao.updateUser(testUser, testUserUid)).willReturn(1);
 
         ArgumentCaptor<User> captor = ArgumentCaptor.forClass(User.class);
 
-        int updateResult = userService.updateUser(testUser);
+        int updateResult = userService.updateUser(testUser, null);
         Mockito.verify(fakeDataDao).selectUserByUserUid(testUserUid);
-        Mockito.verify(fakeDataDao).updateUser(captor.capture());
+        Mockito.verify(fakeDataDao).updateUser(captor.capture(), testUserUid);
 
         User user = captor.getValue();
         assertThat(user.getUserUid()).isNotNull();
