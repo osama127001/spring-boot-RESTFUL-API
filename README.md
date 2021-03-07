@@ -1,5 +1,5 @@
 
-<h1 align="center"> 🍀 Spring Boot</h1>
+<h1 align="center"> 🍀 Spring Boot Restful API </h1>
 
 <p align="center">
 Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need minimal Spring configuration.
@@ -117,7 +117,7 @@ Annotations | Description |
 @DeleteMapping | Marked on a `DELETE` method.
 @PathVariable | Marking a property as a path variable.
 @RequestBody | Added in front of the `User` in argument list. This indicates to map the incoming data from post request to this `User` model
-
+@Qualifier("BeanName") | If 2 DAO classes are implementing an interface, and that interface is injected to a service, then it will throw an error telling that it does not know which DAO class to use, in that case, use this annotation with the DAO class name which u want to use.
 
 </details>
 
